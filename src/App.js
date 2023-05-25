@@ -16,9 +16,6 @@ function App() {
     setCurrentPage(title)
   }
   const [currentUsers, setCurrentUsers] = React.useState([]);
-    React.useEffect(() => {
-        setCurrentUsers([{"name": "alvi", "password": "test"}])
-    }, []);
 
   const addUser = (username, password) => {
     for (var i = 0; i < currentUsers.length; i++) {

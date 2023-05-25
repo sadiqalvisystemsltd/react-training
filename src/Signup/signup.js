@@ -51,7 +51,7 @@ function Signup(props) {
     return(
       <div className='row justify-content-center align-items-center'>
       <div className='col-4'>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} style={{border: 'solid 1px', borderRadius: '8px'}}>
           <TextField
               id="username"
               type="text"
@@ -96,10 +96,27 @@ function Signup(props) {
               helperText={formik.touched.address && formik.errors.address}
             />
             <br/><br/>
-            CNIC: <input type="file" name="file" onChange={onFileUpload} />
+            <input
+              color="primary"
+              accept="application/pdf"
+              type="file"
+              onChange={onFileUpload}
+              id="icon-button-file"
+              style={{ display: 'none', }}
+            />
+            <label htmlFor="icon-button-file">
+              <Button
+                variant="contained"
+                component="span"
+                size="large"
+              >
+                Upload CNIC
+              </Button>
+            </label>
+            <br/>{"(pdf only)"}
             <br/>
           <Button type="submit"
-            className="mt-2">
+            className="mt-2" style={{marginBottom: '8px', border: '1px solid', borderColor:'#2E76E5'}}>
             Signup
           </Button>
         </form>

@@ -23,7 +23,7 @@ function Header(props) {
 
         <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand>Users</Navbar.Brand>
+          <Navbar.Brand>Crypto Exchange</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
