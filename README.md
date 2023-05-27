@@ -12,9 +12,7 @@ Add the details in the form and submit.
 
 ![image](https://github.com/sadiqalvisystemsltd/react-training/assets/134526875/ef9befbe-dbb0-4234-af8c-e3a55970d3a5)
 
-After successful signup/login you’ll be able to see the dashboard.
-
-Also you can logout any after clicking the logout button on top right.
+After successful signup/login you’ll be able to see the dashboard. Also you can logout any after clicking the logout button on top right.
 
 
 
