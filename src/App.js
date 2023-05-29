@@ -8,10 +8,12 @@ import Home from './Home/home';
 import React from 'react';
 import Login from './Login/login';
 import Signup from './Signup/signup';
+import { BrowserRouter as Router,Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState("login");
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
   const updateCurrentPage = (title) => {
     setCurrentPage(title)
   }
@@ -37,18 +39,21 @@ function App() {
 
   const logout = () => {
     setLoggedIn(false);
+    navigate("/");
   }
 
   const onLoginSignupSuccess = () => {
     setLoggedIn(true);
-    setCurrentPage("Home")
+    navigate("/");
   }
   return (
-    <div className="App">
+    <div className="App" id="myappelement">
       <Header className="App-header" titleChangeHandler = {updateCurrentPage} loggedIn={loggedIn} logout={logout}/>
-      {loggedIn && currentPage == "Home" ? <Home currentUsers={currentUsers}/> : !loggedIn && currentPage == "Home" ? <p>Please log in or signup</p>: <></>}
-      {currentPage == "Login" && <Login onLoginHandler={login} onLoginSignupSuccess={onLoginSignupSuccess} />}
-      {currentPage == "Signup" && <Signup onSignupSubmitHandler={addUser}  onLoginSignupSuccess={onLoginSignupSuccess} />}
+      <Routes>
+          <Route path="/" element={loggedIn ? <Home currentUsers={currentUsers}/> : <p>Please log in or signup</p>} />
+          <Route path="login" element={<Login onLoginHandler={login} onLoginSignupSuccess={onLoginSignupSuccess} />} />
+          <Route path="signup" element={<Signup onSignupSubmitHandler={addUser}  onLoginSignupSuccess={onLoginSignupSuccess} />} />
+      </Routes>
     </div>
   );
 }

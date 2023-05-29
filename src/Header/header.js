@@ -2,10 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Outlet, Link } from "react-router-dom";
 
 function Header(props) {
     const onLoginClick = () => {
         props.titleChangeHandler("Login")
+        
     }
     const onSignupClick = () => {
         props.titleChangeHandler("Signup")
@@ -38,9 +40,9 @@ function Header(props) {
               style={{ maxHeight: "100px"}}
               navbarScroll
             >
-              {!props.loggedIn && <Nav.Link href="#login" onClick={onLoginClick} >Login</Nav.Link>}
-              {!props.loggedIn && <Nav.Link href="#signup" onClick={onSignupClick}>Signup</Nav.Link>}
-              {props.loggedIn && <Nav.Link href="#logout" onClick={onLogout}>Logout</Nav.Link>}
+              {!props.loggedIn && <Link to="/login" style={{marginRight: '10px'}}>Login</Link>}
+              {!props.loggedIn && <Link to="/signup" style={{marginRight: '10px'}}>Signup</Link>}
+              {props.loggedIn && <Link to="/" onClick={onLogout}>Logout</Link>}
             </Nav>
             
           </Navbar.Collapse>

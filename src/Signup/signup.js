@@ -34,7 +34,6 @@ function Signup(props) {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log("On Submit called")
         const signupResponse = props.onSignupSubmitHandler(values["username"], values["password"]);
         if(signupResponse == "USERNAME ALREADY EXISTS") {
             toast.error("Username already exists!")

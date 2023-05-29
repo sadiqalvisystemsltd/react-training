@@ -1,4 +1,5 @@
 import React from "react";
+import BlogInfo from '../blog/bloginfo';
 
 function Home(props) {
     
@@ -11,6 +12,7 @@ function Home(props) {
                 })
 
             }
+            <BlogInfo />
         </>
     )
 }
