@@ -36,6 +36,7 @@ function BlogInfo(props) {
       }
     
       function closeModal() {
+        setSelectedIndex(-1);
         setIsOpen(false);
       }
 
@@ -46,7 +47,19 @@ function BlogInfo(props) {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     
     const onUpdateClick = (id) => {
-
+        const bdata = [...blogsData];
+        let row = null;
+        for (let i = 0; i < bdata.length; i++) {
+            if(bdata[i].id == id) {
+                row = bdata[i];
+                break;
+            }
+        }
+        formik.values.title = row.title;
+        formik.values.subTitle = row.subTitle;
+        formik.values.author = row.author;
+        setSelectedIndex(id);
+        openModal();
     }
 
     const onDeleteClick = (id) => {
@@ -105,6 +118,22 @@ function BlogInfo(props) {
             const title = values["title"];
             const subTitle = values["subTitle"];
             const author = values["author"];
+            if (selectedIndex > 0) {
+                const bdata = [...blogsData];
+                let row = null;
+                for (let i = 0; i < bdata.length; i++) {
+                    if(bdata[i].id == selectedIndex) {
+                        bdata[i].title = title;
+                        bdata[i].subTitle = subTitle;
+                        bdata[i].author = author;
+                        break;
+                    }
+                }
+                setBlogsData(bdata);
+                closeModal();
+                return;
+            }
+            
             setBlogsData([...blogsData, {"id": blogsData.length + 1, "title": title, "subTitle":subTitle, "author": author}]);
             closeModal();
         },
@@ -157,12 +186,12 @@ function BlogInfo(props) {
                         <br/>
                         <Button type="submit"
                             className="mt-2" style={{marginBottom: '8px', border: '1px solid', borderColor:'#2E76E5'}}>
-                            Add Info
+                            {selectedIndex > 0 ? "Update Info" : "Add Info"}
                         </Button>
                     </form>
                 </Modal>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <div style={{ height: 400, width: '60%' }}>
+                
+                <div style={{ height: 400, width: '60%', marginLeft:"auto", marginRight:"auto", marginTop: '20%' }}>
                 <DataGrid
                     rows={blogsData}
                     columns={columns}
