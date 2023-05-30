@@ -9,6 +9,7 @@ import React from 'react';
 import Login from './Login/login';
 import Signup from './Signup/signup';
 import { BrowserRouter as Router,Routes, Route, useNavigate } from "react-router-dom";
+import BlogInfo from './blog/bloginfo';
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState("login");
@@ -53,6 +54,7 @@ function App() {
           <Route path="/" element={loggedIn ? <Home currentUsers={currentUsers}/> : <p>Please log in or signup</p>} />
           <Route path="login" element={<Login onLoginHandler={login} onLoginSignupSuccess={onLoginSignupSuccess} />} />
           <Route path="signup" element={<Signup onSignupSubmitHandler={addUser}  onLoginSignupSuccess={onLoginSignupSuccess} />} />
+          <Route path="blog" element={<BlogInfo />} />
       </Routes>
     </div>
   );

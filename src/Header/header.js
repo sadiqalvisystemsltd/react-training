@@ -34,6 +34,7 @@ function Header(props) {
               navbarScroll
             >
               <Nav.Link href="#home" onClick={onHomeClick}>Dashboard</Nav.Link>
+              {props.loggedIn && <Link to="/blog" style={{marginRight: '10px', marginTop: '8px'}}>Blog</Link>}
             </Nav>
             <Nav
               className="ms-auto my-2 my-lg-0"

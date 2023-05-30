@@ -17,7 +17,7 @@ function BlogInfo(props) {
     
     const customStyles = {
         content: {
-          top: '50%',
+          top: '30%',
           left: '50%',
           right: 'auto',
           bottom: 'auto',
@@ -120,7 +120,6 @@ function BlogInfo(props) {
             const author = values["author"];
             if (selectedIndex > 0) {
                 const bdata = [...blogsData];
-                let row = null;
                 for (let i = 0; i < bdata.length; i++) {
                     if(bdata[i].id == selectedIndex) {
                         bdata[i].title = title;
