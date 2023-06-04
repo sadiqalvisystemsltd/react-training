@@ -1,0 +1,4 @@
+export const types = {
+    TRANSFER_CREDITS: 'TRANSFER_CREDITS',
+    LOAD_COINS_DATA: 'LOAD_COINS_DATA',
+};

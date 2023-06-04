@@ -35,6 +35,7 @@ function Header(props) {
             >
               <Nav.Link href="#home" onClick={onHomeClick}>Dashboard</Nav.Link>
               {props.loggedIn && <Link to="/blog" style={{marginRight: '10px', marginTop: '8px'}}>Blog</Link>}
+              {props.loggedIn && <Link to="/crypto-dashboard" style={{marginRight: '10px', marginTop: '8px'}}>Crypto Dashboard</Link>}
             </Nav>
             <Nav
               className="ms-auto my-2 my-lg-0"
