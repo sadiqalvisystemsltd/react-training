@@ -14,6 +14,8 @@ import CryptoExchangeViewer from './Crypto/exchange-dashboard';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import TransferCoins from './Crypto/transfer-coins';
+import ProtectedRoute from "./ProtectedRoute";
+
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState("login");
@@ -42,15 +44,17 @@ function App() {
     return "FAILURE"
   };
 
-  const logout = () => {
+  const logout = React.useCallback(() => {
+    
     setLoggedIn(false);
     navigate("/");
-  }
+  }, [loggedIn]);
 
-  const onLoginSignupSuccess = () => {
+  const onLoginSignupSuccess = React.useCallback(() => {
     setLoggedIn(true);
     navigate("/");
-  }
+  }, [loggedIn]);
+
   return (
     <div className="App" id="myappelement">
       <Provider store={store}>
@@ -59,9 +63,24 @@ function App() {
           <Route path="/" element={loggedIn ? <Home currentUsers={currentUsers}/> : <p>Please log in or signup</p>} />
           <Route path="login" element={<Login onLoginHandler={login} onLoginSignupSuccess={onLoginSignupSuccess} />} />
           <Route path="signup" element={<Signup onSignupSubmitHandler={addUser}  onLoginSignupSuccess={onLoginSignupSuccess} />} />
-          <Route path="blog" element={<BlogInfo />} />
-          <Route path="crypto-dashboard" element={<CryptoExchangeViewer />} />
-          <Route path="transfer-coins" element={<TransferCoins />} />
+          
+          
+          <Route path="blog" element={
+            <ProtectedRoute isAllowed={loggedIn}>
+                <BlogInfo />
+            </ProtectedRoute>
+          } />
+          <Route path="crypto-dashboard" element={
+            <ProtectedRoute isAllowed={loggedIn}>
+              <CryptoExchangeViewer />
+            </ProtectedRoute>
+          } />
+          <Route path="transfer-coins" element={
+          <ProtectedRoute isAllowed={loggedIn}>
+            <TransferCoins />
+          </ProtectedRoute>
+          } />
+          
       </Routes>
       </Provider>
     </div>

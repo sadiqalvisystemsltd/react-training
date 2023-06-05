@@ -2,9 +2,10 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 function Header(props) {
+    const navigate = useNavigate();
     const onLoginClick = () => {
         props.titleChangeHandler("Login")
         
@@ -14,7 +15,8 @@ function Header(props) {
     }
 
     const onHomeClick = () => {
-        props.titleChangeHandler("Home")
+        props.titleChangeHandler("Home");
+        navigate("/");
     }
 
     const onLogout = () => {
@@ -33,7 +35,7 @@ function Header(props) {
               style={{ maxHeight: "100px"}}
               navbarScroll
             >
-              <Nav.Link href="#home" onClick={onHomeClick}>Dashboard</Nav.Link>
+              <Nav.Link href="#" onClick={onHomeClick}>Dashboard</Nav.Link>
               {props.loggedIn && <Link to="/blog" style={{marginRight: '10px', marginTop: '8px'}}>Blog</Link>}
               {props.loggedIn && <Link to="/crypto-dashboard" style={{marginRight: '10px', marginTop: '8px'}}>Crypto Dashboard</Link>}
             </Nav>

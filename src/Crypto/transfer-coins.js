@@ -26,7 +26,7 @@ function TransferCoins() {
   
       const formik = useFormik({
         initialValues: {
-            coinName: searchParams.get("coin_name"),
+            coinName: searchParams.get("coin_name") || '',
             amount: '',
             transferAddress: '',
         },
@@ -42,6 +42,7 @@ function TransferCoins() {
 
       return(
         <div>
+            <h1>Send Crypto Coins</h1>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="coinName" style={{marginRight: '4px'}}>Coin Name: </label>
             <select
