@@ -418,25 +418,34 @@ function CryptoExchangeViewer() {
             }
         }).then(data => {
             
-            // dispatch(loadCoinsData(resp_json));
+            if(!data) {
+                let userOwnedCoins = [];
+                let rates = coinsJson["rates"];
+                if(coinsData.length <= 0) {
+                    for (const [key, value] of Object.entries(rates)) {
+                        let amount = Math.floor(Math.random() * 100) + 1;
+                        let dataDict = {"id": key, "cryptoCoin": key, "amount": amount, "liveRate": value}
+                        userOwnedCoins.push(dataDict);
+                    }
+                    dispatch(loadCoinsData(userOwnedCoins));
+                }
+            }
             console.log("Coins Data: ", data);
         }).catch(exception => {
             console.log("Exception", exception); 
+            let userOwnedCoins = [];
+            let rates = coinsJson["rates"];
+            if(coinsData.length <= 0) {
+                for (const [key, value] of Object.entries(rates)) {
+                    let amount = Math.floor(Math.random() * 100) + 1;
+                    let dataDict = {"id": key, "cryptoCoin": key, "amount": amount, "liveRate": value}
+                    userOwnedCoins.push(dataDict);
+                }
+                dispatch(loadCoinsData(userOwnedCoins));
+            }
         });
         
-        // fetch('./coinsdata.json').then(response => {
-        //     dispatch(loadCoinsData(response));
-        // })  
-        let userOwnedCoins = [];
-        let rates = coinsJson["rates"];
-        if(coinsData.length <= 0) {
-            for (const [key, value] of Object.entries(rates)) {
-                let amount = Math.floor(Math.random() * 100) + 1;
-                let dataDict = {"id": key, "cryptoCoin": key, "amount": amount, "liveRate": value}
-                userOwnedCoins.push(dataDict);
-            }
-            dispatch(loadCoinsData(userOwnedCoins));
-        }
+        
     }, []);
 
     const onTransferClick =  (coinName) => {
